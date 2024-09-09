@@ -3,6 +3,48 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Finance Manager</title>
-        <script src"https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/vue@3.0.2"></script>
     </head>
+    <body>
+        <h1>Finance Manager</h1>
+
+        <!-- controlled by app.js -->
+        <div id="app">
+            <h2 @click="changeGreeting">{{ greeting }} {{ name }}</h2>
+
+            <div v-if="showAge">
+                <p >Your age: {{ age }}</p>
+
+                <button v-on:click="age++">
+                    increase age
+                </button>
+                <button @click="age--">
+                    decrease age
+                </button>
+
+                <div @click="age = 30">
+                    click me to set age to 30
+                </div>
+            </div>
+
+            <div @click="changeName('Harry Potter')">
+                change name to Harry Potter
+            </div>
+
+            <button @click="showAge = !showAge">
+                <span v-if="showAge === true"> hide age </span>
+                <span v-else> show age</span>
+            </button>
+
+            <div v-show="showAge"> currently showing age</div>
+
+            <!-- v-if false removes the section from the code -->
+            <!-- v-show false changes style to "display: none"-->
+            <!-- adding and removing from dom is more costly than showing and hiding in css -->
+            <!-- use v-show if it will change often, else use v-if -->
+            
+        </div>
+
+        <script src="app.js"></script>
+    </body>
 </html>
