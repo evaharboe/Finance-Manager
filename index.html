@@ -4,6 +4,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Finance Manager</title>
         <script src="https://unpkg.com/vue@3.0.2"></script>
+        <style>
+            body {
+                background: #313334;
+                max-width: 960px;
+                margin: 20px auto;
+                color: #fff;
+            }
+            p, h2, ul {
+                padding: 0;
+                margin: 0;
+            }
+            li{
+                list-style-type: none;
+                background: #7a5959;
+                margin: 20px auto;
+                padding: 10px 20px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            li.income {
+                background: rgb(68, 85, 68);
+            }
+        </style>
     </head>
     <body>
         <h1>Finance Manager</h1>
@@ -12,37 +37,38 @@
         <div id="app">
             <h2 @click="changeGreeting">{{ greeting }} {{ name }}</h2>
 
-            <div v-if="showAge">
-                <p >Your age: {{ age }}</p>
+            <div>
+                <p >Your balance: {{ balance }}</p>
+            </div>
 
-                <button v-on:click="age++">
-                    increase age
+            <div>
+                Add New Expense
+                <button @click=toggleShowForm>
+                    <span v-if="showForm">-</span>
+                    <span v-else>+</span>
                 </button>
-                <button @click="age--">
-                    decrease age
-                </button>
-
-                <div @click="age = 30">
-                    click me to set age to 30
+                <div v-if="showForm">
+                    Price: <input type="number" v-model="price">
+                    Category: <input type="text" v-model="category">
+                    Description: <input type="text" v-model="description">
+                    <button @click="handleAddTransaction">Add</button>
                 </div>
             </div>
+            <div>
+                All Transactions
+                <ul>
+                    <li v-for="transaction in transactions" :class="{ income: transaction.isIncome }" >
+                        <p>{{ transaction.price }} - {{ transaction.category }} - {{ transaction.title }}</p>
+                    </li>
+                </ul>
 
-            <div @click="changeName('Harry Potter')">
-                change name to Harry Potter
+                </div>
             </div>
-
-            <button @click="showAge = !showAge">
-                <span v-if="showAge === true"> hide age </span>
-                <span v-else> show age</span>
-            </button>
-
-            <div v-show="showAge"> currently showing age</div>
 
             <!-- v-if false removes the section from the code -->
             <!-- v-show false changes style to "display: none"-->
             <!-- adding and removing from dom is more costly than showing and hiding in css -->
             <!-- use v-show if it will change often, else use v-if -->
-            
         </div>
 
         <script src="app.js"></script>
