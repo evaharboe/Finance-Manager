@@ -15,7 +15,12 @@ const app = Vue.createApp({
             ],
             name: 'John Doe',
             showForm: true,
-            balance: 2000
+            balance: 2000,
+            necessities: 10,
+            funMoney: 10,
+            savings: 10,
+            income: 1000,
+            expenses: 800,
         }
     },
     methods: {
