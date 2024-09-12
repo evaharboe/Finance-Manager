@@ -21,6 +21,7 @@ const app = Vue.createApp({
             savings: 10,
             income: 1000,
             expenses: 800,
+            filter: 'all'
         }
     },
     methods: {
@@ -32,6 +33,25 @@ const app = Vue.createApp({
         toggleShowForm() {
             this.showForm = !this.showForm
         },
+        
+        handleFilter(filter) {
+            if (filter === 'all') {
+                this.filter = 'all'
+            } else if (filter === 'income') {
+                this.filter = 'income'
+            } else if (filter === 'expenses') {
+                this.filter = 'expenses'
+            }
+        }
+
+    },
+    computed: {
+        filterIncome() {
+            return this.transactions.filter((transaction) => transaction.isIncome)
+        },
+        filterExpenses() {
+            return this.transactions.filter((transaction) => !transaction.isIncome)
+        }
     }
 })
 

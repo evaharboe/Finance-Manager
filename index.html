@@ -64,10 +64,27 @@
             </div>
             <div>
                 All Transactions
+                <div>
+                    <button @click="handleFilter('all')">All</button>
+                    <button @click="handleFilter('income')">Income</button>
+                    <button @click="handleFilter('expenses')">Expenses</button>
+                </div>
                 <ul>
-                    <li v-for="transaction in transactions" :class="{ income: transaction.isIncome }" >
+                    <div v-if="filter==='all'">
+                        <li v-for="transaction in transactions" :class="{ income: transaction.isIncome }">
                         <p>{{ transaction.price }} - {{ transaction.category }} - {{ transaction.title }}</p>
-                    </li>
+                        </li>
+                    </div>
+                    <div v-else-if="filter==='income'">
+                        <li v-for="transaction in filterIncome" :class="{ income: transaction.isIncome }">
+                        <p>{{ transaction.price }} - {{ transaction.category }} - {{ transaction.title }}</p>
+                        </li>
+                    </div>
+                    <div v-else-if="filter==='expenses'">
+                        <li v-for="transaction in filterExpenses" :class="{ income: transaction.isIncome }">
+                        <p>{{ transaction.price }} - {{ transaction.category }} - {{ transaction.title }}</p>
+                        </li>
+                    </div>
                 </ul>
 
                 </div>
